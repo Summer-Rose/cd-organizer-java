@@ -22,4 +22,14 @@ public class IntegrationTest extends FluentTest {
   	goTo("http://localhost:4567/");
   	assertThat(pageSource()).contains("CD Organizer");
   }
+
+  @Test
+  public void insertsCDCorrectly(){
+    goTo("http://localhost:4567/");
+    fill("#artist").with("Summer");
+    fill("#title").with("Ju");
+    find("#brazilian").click();
+    submit(".btn");
+    assertThat(pageSource()).contains("Summer");
+  }
 }

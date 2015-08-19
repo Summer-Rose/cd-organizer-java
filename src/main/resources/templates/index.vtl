@@ -22,3 +22,39 @@
   </div>
   <button type="submit" class="btn btn-success">Add</button>
 </form>
+
+<hr/>
+
+#if ($cdList)
+<h2>Your CD's</h2>
+<div class="col-sm-4">
+  <h4>Artist</h4>
+  <ul id="artist">
+  #foreach ($cd in $cdList)
+      <li>$cd.getArtist()</li>
+  #end
+    </ul>
+  </div>
+
+  <div class="col-sm-4">
+    <h4>Title</h4>
+    <ul id="title">
+    #foreach ($cd in $cdList)
+        <li>$cd.getTitle()</li>
+    #end
+      </ul>
+    </div>
+
+<div class="col-sm-4">
+  <h4>Genre</h4>
+  <ul id="genre">
+  #foreach ($cd in $cdList)
+      <li>$cd.getGenre()</li>
+  #end
+    </ul>
+  </div>
+
+
+
+
+#end

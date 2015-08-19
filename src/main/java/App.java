@@ -14,9 +14,34 @@ public class App {
         get("/", (request, response) -> {
             HashMap<String, Object> model = new HashMap<String, Object>();
 
-            //model.put("tasks", request.session().attribute("tasks"));
+            model.put("cdList", request.session().attribute("cdList"));
             model.put("template", "templates/index.vtl");
             return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
+
+        post("/cd-list", (request, response) -> {
+            HashMap<String, Object> model = new HashMap<String, Object>();
+
+            ArrayList<CD> cdList = request.session().attribute("cdList");
+
+            if (cdList == null){
+              cdList = new ArrayList<CD>();
+              request.session().attribute("cdList", cdList);
+            }
+
+            String artist = request.queryParams("artist");
+            String title = request.queryParams("title");
+            String genre = request.queryParams("genre");
+            CD newCD = new CD(artist, title, genre);
+
+            cdList.add(newCD);
+
+            model.put("cdList", request.session().attribute("cdList"));
+            model.put("template", "templates/index.vtl");
+              return new ModelAndView(model, layout);
+            }, new VelocityTemplateEngine());
+
     }
+
+
 }

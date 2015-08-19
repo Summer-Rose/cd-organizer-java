@@ -1,20 +1,19 @@
 public class CD {
-  private String mTitle;
   private String mArtist;
+  private String mTitle;
   private String mGenre;
 
-  public CD (String title, String artist, String genre){
-    mTitle = title;
+  public CD (String artist, String title, String genre){
     mArtist = artist;
+    mTitle = title;
     mGenre = genre;
+  }
+  public String getArtist(){
+    return mArtist;
   }
 
   public String getTitle(){
     return mTitle;
-  }
-
-  public String getArtist(){
-    return mArtist;
   }
 
   public String getGenre(){
