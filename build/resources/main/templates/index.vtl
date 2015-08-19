@@ -35,6 +35,7 @@
       <th>Artist</th>
       <th>Album Title</th>
       <th>Genre</th>
+      <th>ID</th>
       <th>Remove</th>
     </tr>
   </thead>
@@ -44,10 +45,11 @@
       <td>$cd.getArtist()</td>
       <td>$cd.getTitle()</td>
       <td>$cd.getGenre()</td>
+      <td>$cd.getId()</td>
       <td>
-        <form action="/cd-list" method="post">
-          <input id=$cd.find() name="deleteClicked" class="form-control" type="hidden" value=true>
-          <button type="submit" class="btn btn-info" id="delete">Delete</button>
+        <form action="/cd-list/$cd.getId()" method="post">
+          <input id="deleteClicked" name="deleteClicked" class="form-control" type="hidden" value=true>
+          <button onClick="$CD.delete()" type="submit" class="btn btn-info" id="delete">Delete</button>
         </form>
       </td>
     </tr>

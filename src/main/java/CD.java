@@ -6,15 +6,14 @@ public class CD {
   private String mArtist;
   private String mTitle;
   private String mGenre;
-  public static int mId;
+  private int mId;
 
   public CD (String artist, String title, String genre){
     mArtist = artist;
     mTitle = title;
     mGenre = genre;
-    instances.add(this);
-    mId = instances.size();
   }
+
   public String getArtist(){
     return mArtist;
   }
@@ -27,12 +26,17 @@ public class CD {
     return mGenre;
   }
 
-  public static int getId() {
+  public int getId() {
     return mId;
   }
 
   public static ArrayList<CD> all() {
     return instances;
+  }
+
+  public void save() {
+    instances.add(this);
+    mId = instances.size();
   }
 
   public static CD find(int id) {
@@ -43,10 +47,8 @@ public class CD {
    }
   }
 
-  public static void deleteById(int id){
-    System.out.println(instances.get(0).getArtist());
-    instances.remove(id - 1);
-    System.out.println(instances.get(0).getArtist());
+  public void delete() {
+    instances.remove(mId - 1);
   }
 
 
