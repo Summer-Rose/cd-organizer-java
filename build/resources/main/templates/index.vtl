@@ -26,35 +26,38 @@
 <hr/>
 
 #if ($cdList)
+<div class="container">
 <h2>Your CD's</h2>
-<div class="col-sm-4">
-  <h4>Artist</h4>
-  <ul id="artist">
-  #foreach ($cd in $cdList)
-      <li>$cd.getArtist()</li>
-  #end
-    </ul>
-  </div>
 
-  <div class="col-sm-4">
-    <h4>Title</h4>
-    <ul id="title">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Artist</th>
+      <th>Album Title</th>
+      <th>Genre</th>
+      <th>Remove</th>
+    </tr>
+  </thead>
+  <tbody>
     #foreach ($cd in $cdList)
-        <li>$cd.getTitle()</li>
+    <tr>
+      <td>$cd.getArtist()</td>
+      <td>$cd.getTitle()</td>
+      <td>$cd.getGenre()</td>
+      <td>
+        <form action="/cd-list" method="post">
+          <input id=$cd.find() name="deleteClicked" class="form-control" type="hidden" value=true>
+          <button type="submit" class="btn btn-info" id="delete">Delete</button>
+        </form>
+      </td>
+    </tr>
     #end
-      </ul>
-    </div>
-
-<div class="col-sm-4">
-  <h4>Genre</h4>
-  <ul id="genre">
-  #foreach ($cd in $cdList)
-      <li>$cd.getGenre()</li>
-  #end
-    </ul>
-  </div>
-
-
-
-
+  </tbody>
+</table>
+</div>
 #end
+
+<br>
+<hr>
+
+<li><input id="deleteClicked" name="deleteClicked" type="hidden" value="true"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></li>

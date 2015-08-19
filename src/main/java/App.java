@@ -36,12 +36,21 @@ public class App {
 
             cdList.add(newCD);
 
+            boolean deleteClicked = Boolean.parseBoolean(request.queryParams("deleteClicked"));
+
+            //this doesn't work yet
+            if(deleteClicked){
+              cdList.remove(CD.getId());
+            }
+
+
             model.put("cdList", request.session().attribute("cdList"));
             model.put("template", "templates/index.vtl");
               return new ModelAndView(model, layout);
             }, new VelocityTemplateEngine());
 
     }
+
 
 
 }
