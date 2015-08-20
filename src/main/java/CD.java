@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class CD {
   public static ArrayList<CD> instances = new ArrayList<CD>();
+  public static int idCounter = 0;
 
   private String mArtist;
   private String mTitle;
@@ -36,7 +37,8 @@ public class CD {
 
   public void save() {
     instances.add(this);
-    mId = instances.size();
+    mId = CD.idCounter;
+    CD.idCounter++;
   }
 
   public static CD find(int id) {
@@ -48,8 +50,15 @@ public class CD {
   }
 
   public void delete() {
-    instances.remove(mId - 1);
+    int index = -1;
+    for (CD cd : CD.all()) {
+      if (cd.getId() == mId) {
+        index = CD.all().indexOf(this);
+      }
+    }
+    if (index > -1) {
+      CD.all().remove(index);
+    }
   }
-
 
 }

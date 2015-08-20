@@ -14,7 +14,6 @@ public class App {
         get("/", (request, response) -> {
             HashMap<String, Object> model = new HashMap<String, Object>();
 
-            //model.put("cdList", request.session().attribute("cdList"));
             model.put("template", "templates/index.vtl");
             return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
@@ -31,34 +30,24 @@ public class App {
 
             CD newCD = new CD(artist, title, genre);
             newCD.save();
-            System.out.println(CD.all().get(0));
-
-
-
-            //boolean deleteClicked = Boolean.parseBoolean(request.queryParams("deleteClicked"));
-
-            // if (deleteClicked) {
-            //   CD.delete();
-            // }
-
 
             model.put("cdList",  cdList);
             model.put("template", "templates/index.vtl");
               return new ModelAndView(model, layout);
             }, new VelocityTemplateEngine());
 
-            post("/cd-list/:id", (request, response) -> {
-                HashMap<String, Object> model = new HashMap<String, Object>();
-                int id = Integer.parseInt(request.params("id"));
-                CD foundCD = CD.find(id);
-                foundCD.delete();
 
+        post("/cd-list/:id", (request, response) -> {
+            HashMap<String, Object> model = new HashMap<String, Object>();
+            
+            int id = Integer.parseInt(request.params("id"));
+            CD foundCD = CD.find(id);
+            foundCD.delete();
 
-
-                model.put("cdList",  CD.all());
-                model.put("template", "templates/index.vtl");
-                  return new ModelAndView(model, layout);
-                }, new VelocityTemplateEngine());
+            model.put("cdList",  CD.all());
+            model.put("template", "templates/index.vtl");
+              return new ModelAndView(model, layout);
+            }, new VelocityTemplateEngine());
 
 
     }

@@ -27,7 +27,7 @@
 
 #if ($cdList)
 <div class="container">
-<h2>Your CD's</h2>
+<h2>Your CDs</h2>
 
 <table class="table table-striped">
   <thead>
@@ -40,20 +40,30 @@
     </tr>
   </thead>
   <tbody>
-    #foreach ($cd in $cdList)
-    <tr>
-      <td>$cd.getArtist()</td>
-      <td>$cd.getTitle()</td>
-      <td>$cd.getGenre()</td>
-      <td>$cd.getId()</td>
-      <td>
-        <form action="/cd-list/$cd.getId()" method="post">
+
+        #if ($cdList.isEmpty())
+        <form action="/cd-list" method="post">
           <input id="deleteClicked" name="deleteClicked" class="form-control" type="hidden" value=true>
-          <button onClick="$CD.delete()" type="submit" class="btn btn-info" id="delete">Delete</button>
+          <button type="submit" class="btn btn-info">Delete</button>
         </form>
-      </td>
-    </tr>
-    #end
+        #else
+          #foreach ($cd in $cdList)
+          <tr>
+            <td>$cd.getArtist()</td>
+            <td>$cd.getTitle()</td>
+            <td>$cd.getGenre()</td>
+            <td>$cd.getId()</td>
+            <td>
+              <form action="/cd-list/$cd.getId()" method="post">
+                <input id="deleteClicked" name="deleteClicked" class="form-control" type="hidden" value=true>
+                <button type="submit" class="btn btn-info">Delete</button>
+              </form>
+            </td
+          </tr>
+          #end
+        #end
+
+
   </tbody>
 </table>
 </div>
